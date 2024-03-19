@@ -163,41 +163,83 @@ public class CustomerManagerStepDefinitions
 
     #endregion
 
-    #region MyRegion
+    #region Operator updates the customer
 
     [Scope(Tag = "update_customer")]
     [Given(@"Operator saved a customer before")]
-    public void GivenOperatorSavedACustomerBefore()
+    public async Task GivenOperatorSavedACustomerBefore()
     {
-        throw new PendingStepException();
+        Customer entity = new()
+        {
+            FirstName = "FirstName",
+            LastName = "LastName",
+            PhoneNumber = 55555555,
+            Email = "Email",
+            BankAccountNumber = "BankAccountNumber",
+            DateOfBirth = DateTime.Now
+        };
+        _dbContext.Add(entity);
+
+        await _dbContext.SaveChangesAsync();
+        _scenarioContext["UpdatedCustomerId"] = entity.Id;
     }
 
     [Scope(Scenario = "Operator updates the customer")]
     [When(@"he update the customer")]
-    public void WhenHeUpdateTheCustomer()
+    public async void WhenHeUpdateTheCustomer()
     {
-        throw new PendingStepException();
+        UpdateCustomerCommand command = new()
+        {
+            FirstName = "FirstName is changed",
+            LastName = "LastNameis changed",
+            PhoneNumber = 2312312312,
+            Email = "Emailis changed",
+            BankAccountNumber = "BankAccountNumberis changed",
+            DateOfBirth = DateTime.Now
+        };
+        command.SetId(Convert.ToInt32(_scenarioContext["UpdatedCustomerId"]));
+        UpdateCustomerHandler handler = new(_dbContext);
+        await handler.handle(command, default);
+
+        _scenarioContext["UpdatedCustomer"] = command;
     }
 
     [Scope(Scenario = "Operator updates the customer")]
     [Then(@"the customer should change")]
-    public void ThenTheCustomerShouldChange()
+    public async void ThenTheCustomerShouldChange()
     {
-        throw new PendingStepException();
+        var actual = (UpdateCustomerCommand)_scenarioContext["UpdatedCustomer"];
+        var expected = await _dbContext.Set<Customer>().FindAsync(actual.Id);
+
+        Assert.IsNotNull(expected);
+        Assert.AreEqual(expected.FirstName, actual.FirstName);
+        Assert.AreEqual(expected.LastName, actual.LastName);
+        Assert.AreEqual(expected.PhoneNumber, actual.PhoneNumber);
+        Assert.AreEqual(expected.BankAccountNumber, actual.BankAccountNumber);
+        Assert.AreEqual(expected.DateOfBirth, actual.DateOfBirth);
     }
+
+    #endregion
+
+    #region Operator updates the customer
 
     [Scope(Scenario = "Operator updates the wrong customer")]
     [When(@"he update an invalid customer")]
     public void WhenHeUpdateAnInvalidCustomer()
     {
-        throw new PendingStepException();
+        UpdateCustomerCommand command = new();
+        command.SetId(Convert.ToInt32(_scenarioContext["UpdatedCustomerId"]));
+
+        _scenarioContext["WrongUpdateCommand"] = command;
     }
 
     [Scope(Scenario = "Operator updates the wrong customer")]
     [Then(@"should throws not found error")]
     public void ThenShouldThrowsNotFoundError()
     {
-        throw new PendingStepException();
+        UpdateCustomerHandler handler = new(_dbContext);
+
+        Assert.ThrowsAsync<NotFoundException>(async () => await handler.handle((UpdateCustomerCommand)_scenarioContext["WrongUpdateCommand"], default));
     }
 
     #endregion
