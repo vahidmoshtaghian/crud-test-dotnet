@@ -162,4 +162,43 @@ public class CustomerManagerStepDefinitions
     }
 
     #endregion
+
+    #region MyRegion
+
+    [Scope(Tag = "update_customer")]
+    [Given(@"Operator saved a customer before")]
+    public void GivenOperatorSavedACustomerBefore()
+    {
+        throw new PendingStepException();
+    }
+
+    [Scope(Scenario = "Operator updates the customer")]
+    [When(@"he update the customer")]
+    public void WhenHeUpdateTheCustomer()
+    {
+        throw new PendingStepException();
+    }
+
+    [Scope(Scenario = "Operator updates the customer")]
+    [Then(@"the customer should change")]
+    public void ThenTheCustomerShouldChange()
+    {
+        throw new PendingStepException();
+    }
+
+    [Scope(Scenario = "Operator updates the wrong customer")]
+    [When(@"he update an invalid customer")]
+    public void WhenHeUpdateAnInvalidCustomer()
+    {
+        throw new PendingStepException();
+    }
+
+    [Scope(Scenario = "Operator updates the wrong customer")]
+    [Then(@"should throws not found error")]
+    public void ThenShouldThrowsNotFoundError()
+    {
+        throw new PendingStepException();
+    }
+
+    #endregion
 }

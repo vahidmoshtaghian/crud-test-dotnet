@@ -32,6 +32,7 @@ Examples:
 	| test1     | test2    | 1990-05-10  | 564564654564 | SonyaAHerrera@dayrep.com | 00000000      |
 	| test1     | test2    | 1990-05-10  | 564          | BerthaAEllis@teleworm.us | 00000000      |
 
+
 @customers_list
 Scenario: Get all the inserted customer in a list
 	Given Operator saved 3 customers
@@ -42,3 +43,16 @@ Scenario: Get all the inserted customer in a list
 Scenario: Get an empty list if no customer inserted
 	When Operator call the empty list
 	Then No customer should returns
+
+
+@update_customer
+Scenario: Operator updates the customer
+	Given Operator saved a customer before
+	When he update the customer
+	Then the customer should change 
+
+@update_customer
+Scenario: Operator updates the wrong customer
+	Given Operator saved a customer before
+	When he update an invalid customer
+	Then should throws not found error
