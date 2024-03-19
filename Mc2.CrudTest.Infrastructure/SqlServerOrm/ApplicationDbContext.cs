@@ -6,6 +6,11 @@ namespace Mc2.CrudTest.Infrastructure.SqlServerOrm;
 
 public class ApplicationDbContext : DbContext, IContext
 {
+    public ApplicationDbContext()
+    {
+
+    }
+
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
 
