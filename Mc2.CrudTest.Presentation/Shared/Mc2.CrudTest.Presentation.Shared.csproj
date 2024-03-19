@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Mc2.CrudTest.Infrastructure\Mc2.CrudTest.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
 </Project>

@@ -1,45 +1,45 @@
-using Microsoft.AspNetCore.ResponseCompression;
+using Mc2.CrudTest.Core.Application;
+using Mc2.CrudTest.Infrastructure;
 
-namespace Mc2.CrudTest.Presentation
+namespace Mc2.CrudTest.Presentation.Server;
+
+public class Program
 {
-    public class Program
+    public static void Main(string[] args)
     {
-        public static void Main(string[] args)
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+
+        builder.Services.AddControllers();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+
+        builder.Services.AddApplication();
+        builder.Services.AddApplicationSqlServer(builder.Configuration.GetConnectionString("Default"));
+
+        var app = builder.Build();
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
         {
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-
-            builder.Services.AddControllersWithViews();
-            builder.Services.AddRazorPages();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseWebAssemblyDebugging();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-
-            app.MapRazorPages();
-            app.MapControllers();
-            app.MapFallbackToFile("index.html");
-
-            app.Run();
+            app.UseWebAssemblyDebugging();
         }
+        else
+        {
+            app.UseExceptionHandler("/Error");
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+        app.Run();
     }
 }
