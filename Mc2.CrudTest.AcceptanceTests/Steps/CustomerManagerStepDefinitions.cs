@@ -360,20 +360,28 @@ public class CustomerManagerStepDefinitions
 
     #endregion
 
-    #region MyRegion
+    #region Operator requests a wrong customer
 
     [Scope(Scenario = "Operator requests a wrong customer")]
     [When(@"he requests a wrong customer")]
     public void WhenHeRequestsAWrongCustomer()
     {
-        throw new PendingStepException();
+        GetCustomerByIdQuery query = new()
+        {
+            Id = -1
+        };
+
+        _scenarioContext["WrongQueryById"] = query;
     }
 
     [Scope(Scenario = "Operator requests a wrong customer")]
     [Then(@"should throws customer id not found")]
     public void ThenShouldThrowsCustomerIdNotFound()
     {
-        throw new PendingStepException();
+        GetCustomerByIdHandler handler = new(_dbContext);
+        var query = (GetCustomerByIdQuery)_scenarioContext["WrongQueryById"];
+
+        Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle(query, default));
     }
 
     #endregion
