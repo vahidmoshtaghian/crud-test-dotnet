@@ -8,9 +8,9 @@ Scenario: Operator creates a customer
 	Then customer should be created
 
 Examples:
-	| firstName | lastName | dateOfBirth | phoneNumber | email                         | accountNumber |
-	| test1     | test2    | 1990-05-10  | 123456890   | vahid.moshtagh@gmail.com      | 00000000      |
-	| john      | due      | 1900-05-10  | 98766553214 | vahid.moshtaghian@hotmail.com | 11111111      |
+	| firstName | lastName | dateOfBirth | phoneNumber | email                    | accountNumber |
+	| test1     | test2    | 1990-05-10  | 9417867452  | SonyaAHerrera@dayrep.com | 00000000      |
+	| john      | due      | 1900-05-10  | 7206228815  | BerthaAEllis@teleworm.us | 11111111      |
 
 @invalid_email
 Scenario: Operator creates a customer with invalid email
@@ -19,8 +19,8 @@ Scenario: Operator creates a customer with invalid email
 
 Examples:
 	| firstName | lastName | dateOfBirth | phoneNumber | email       | accountNumber |
-	| test1     | test2    | 1990-05-10  | 123456890   | hjftgyhjtg  | 222222        |
-	| test3     | test4    | 1990-12-20  | 123456890   | sdfdsfdsfsd | 3333333       |
+	| test1     | test2    | 1990-05-10  | 9417867452  | hjftgyhjtg  | 222222        |
+	| test3     | test4    | 1990-12-20  | 7206228815  | sdfdsfdsfsd | 3333333       |
 	
 @invalid_phone
 Scenario: Operator creates a customer with invalid phone number
@@ -28,6 +28,6 @@ Scenario: Operator creates a customer with invalid phone number
 	Then should throws phone validation error
 
 Examples:
-	| firstName | lastName | dateOfBirth | phoneNumber | email       | accountNumber |
-	| test1     | test2    | 1990-05-10  | qwerdasdas  | aa@bb.cc    | 00000000      |
-	| test1     | test2    | 1990-05-10  | 564         | aa@bsdff.cc | 00000000      |
+	| firstName | lastName | dateOfBirth | phoneNumber  | email                    | accountNumber |
+	| test1     | test2    | 1990-05-10  | 564564654564 | SonyaAHerrera@dayrep.com | 00000000      |
+	| test1     | test2    | 1990-05-10  | 564          | BerthaAEllis@teleworm.us | 00000000      |

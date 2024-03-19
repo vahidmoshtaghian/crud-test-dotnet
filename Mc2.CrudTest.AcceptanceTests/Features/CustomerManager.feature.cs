@@ -77,8 +77,8 @@ namespace Mc2.CrudTest.AcceptanceTests.Features
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Operator creates a customer")]
         [NUnit.Framework.CategoryAttribute("correct_input")]
-        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "123456890", "vahid.moshtagh@gmail.com", "00000000", null)]
-        [NUnit.Framework.TestCaseAttribute("john", "due", "1900-05-10", "98766553214", "vahid.moshtaghian@hotmail.com", "11111111", null)]
+        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "9417867452", "SonyaAHerrera@dayrep.com", "00000000", null)]
+        [NUnit.Framework.TestCaseAttribute("john", "due", "1900-05-10", "7206228815", "BerthaAEllis@teleworm.us", "11111111", null)]
         public virtual void OperatorCreatesACustomer(string firstName, string lastName, string dateOfBirth, string phoneNumber, string email, string accountNumber, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -130,8 +130,8 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Operator creates a customer with invalid email")]
         [NUnit.Framework.CategoryAttribute("invalid_email")]
-        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "123456890", "hjftgyhjtg", "222222", null)]
-        [NUnit.Framework.TestCaseAttribute("test3", "test4", "1990-12-20", "123456890", "sdfdsfdsfsd", "3333333", null)]
+        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "9417867452", "hjftgyhjtg", "222222", null)]
+        [NUnit.Framework.TestCaseAttribute("test3", "test4", "1990-12-20", "7206228815", "sdfdsfdsfsd", "3333333", null)]
         public virtual void OperatorCreatesACustomerWithInvalidEmail(string firstName, string lastName, string dateOfBirth, string phoneNumber, string email, string accountNumber, string[] exampleTags)
         {
             string[] @__tags = new string[] {
@@ -183,8 +183,8 @@ this.ScenarioInitialize(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Operator creates a customer with invalid phone number")]
         [NUnit.Framework.CategoryAttribute("invalid_phone")]
-        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "qwerdasdas", "aa@bb.cc", "00000000", null)]
-        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "564", "aa@bsdff.cc", "00000000", null)]
+        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "564564654564", "SonyaAHerrera@dayrep.com", "00000000", null)]
+        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "564", "BerthaAEllis@teleworm.us", "00000000", null)]
         public virtual void OperatorCreatesACustomerWithInvalidPhoneNumber(string firstName, string lastName, string dateOfBirth, string phoneNumber, string email, string accountNumber, string[] exampleTags)
         {
             string[] @__tags = new string[] {

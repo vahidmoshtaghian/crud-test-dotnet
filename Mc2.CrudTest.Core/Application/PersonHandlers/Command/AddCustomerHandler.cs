@@ -19,6 +19,8 @@ public class AddCustomerHandler : IRequestHandler<AddCustomerCommand, int>
     {
         if (!request.Email.IsValidEmail())
             throw new EmailValidationException();
+        if (!request.PhoneNumber.IsValidPhone())
+            throw new PhoneValidationException();
 
         var entity = request.MapToDomain();
         _context.Add(entity);
