@@ -221,7 +221,7 @@ public class CustomerManagerStepDefinitions
 
     #endregion
 
-    #region Operator updates the customer
+    #region Operator updates the wrong customer
 
     [Scope(Scenario = "Operator updates the wrong customer")]
     [When(@"he updates an invalid customer")]
