@@ -224,7 +224,7 @@ public class CustomerManagerStepDefinitions
     #region Operator updates the customer
 
     [Scope(Scenario = "Operator updates the wrong customer")]
-    [When(@"he update an invalid customer")]
+    [When(@"he updates an invalid customer")]
     public void WhenHeUpdateAnInvalidCustomer()
     {
         UpdateCustomerCommand command = new();

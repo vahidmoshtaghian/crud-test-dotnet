@@ -54,5 +54,18 @@ Scenario: Operator updates the customer
 @update_customer
 Scenario: Operator updates the wrong customer
 	Given Operator saved a customer before
-	When he update an invalid customer
+	When he updates an invalid customer
+	Then should throws not found error
+
+
+@delete_customer
+Scenario: Operator deletes the customer
+	Given Operator saved a customer before
+	When he delete the customer
+	Then the customer should remove 
+
+@delete_customer
+Scenario: Operator deletes the wrong customer
+	Given Operator saved a customer before
+	When he deletes an invalid customer
 	Then should throws not found error
