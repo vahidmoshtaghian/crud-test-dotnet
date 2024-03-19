@@ -23,7 +23,9 @@ public class CustomerManagerStepDefinitions
         _dbContext = new();
     }
 
-    [Scope(Tag = "correct_input")]
+    #region Operator creates a customer
+
+    [Scope(Scenario = "Operator creates a customer")]
     [When(@"first name is (.*), lastname is (.*), date of birth is (.*), phone number is (.*), email is (.*) and bank account number is (.*)")]
     public void WhenFirstNameLastnameDateOfBirthIsPhoneNumberIsEmailAndBankAccountNumberIs
         (string firstName, string lastName, DateTime birth, long phone, string email, string acocuntNumber)
@@ -33,7 +35,7 @@ public class CustomerManagerStepDefinitions
         _scenarioContext["Customer"] = request;
     }
 
-    [Scope(Tag = "correct_input")]
+    [Scope(Scenario = "Operator creates a customer")]
     [Then(@"customer should be created")]
     public async Task ThenCustomerShouldBeCreatd()
     {
@@ -45,8 +47,11 @@ public class CustomerManagerStepDefinitions
         Assert.NotZero(response);
     }
 
+    #endregion
 
-    [Scope(Tag = "invalid_email")]
+    #region Operator creates a customer with invalid email
+
+    [Scope(Scenario = "Operator creates a customer with invalid email")]
     [When(@"first name is (.*), lastname is (.*), date of birth is (.*), phone number is (.*), email is wrong like (.*) and bank account number is (.*)")]
     public void WhenFirstNameIsTestLastnameIsTestDateOfBirthIsPhoneNumberIsEmailIsWrongLikeHjftgyhjtgAndBankAccountNumberIsAcocuntNumber
         (string firstName, string lastName, DateTime birth, long phone, string email, string acocuntNumber)
@@ -56,7 +61,7 @@ public class CustomerManagerStepDefinitions
         _scenarioContext["CustomerWrongEmail"] = request;
     }
 
-    [Scope(Tag = "invalid_email")]
+    [Scope(Scenario = "Operator creates a customer with invalid email")]
     [Then(@"should throws email validation error")]
     public void ThenshouldThrowsRmailValidationError()
     {
@@ -66,9 +71,11 @@ public class CustomerManagerStepDefinitions
         Assert.ThrowsAsync<EmailValidationException>(async () => await handler.Handle(request, default));
     }
 
+    #endregion
 
+    #region Operator creates a customer with invalid phone number
 
-    [Scope(Tag = "invalid_phone")]
+    [Scope(Scenario = "Operator creates a customer with invalid phone number")]
     [When(@"first name is (.*), lastname is (.*), date of birth is (.*), wrong phone number is (.*), email is (.*) and bank account number is (.*)")]
     public void WhenFirstNameIsTestLastnameIsTestDateOfBirthIsWrongPhoneNumberIsQwerdasdasEmailIsAaBb_CcAndBankAccountNumberIsAcocuntNumber
         (string firstName, string lastName, DateTime birth, long phone, string email, string acocuntNumber)
@@ -78,7 +85,7 @@ public class CustomerManagerStepDefinitions
         _scenarioContext["CustomerWrongPhone"] = request;
     }
 
-    [Scope(Tag = "invalid_phone")]
+    [Scope(Scenario = "Operator creates a customer with invalid phone number")]
     [Then(@"should throws phone validation error")]
     public void ThenSshouldThrowsPhoneValidationError()
     {
@@ -87,4 +94,8 @@ public class CustomerManagerStepDefinitions
 
         Assert.ThrowsAsync<PhoneValidationException>(async () => await handler.Handle(request, default));
     }
+
+    #endregion
+
+
 }
