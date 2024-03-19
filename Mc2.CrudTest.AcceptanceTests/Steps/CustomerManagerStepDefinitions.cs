@@ -167,7 +167,7 @@ public class CustomerManagerStepDefinitions
 
     [Scope(Tag = "update_customer")]
     [Given(@"Operator saved a customer before")]
-    public async Task GivenOperatorSavedACustomerBefore()
+    public async Task GivenOperatorSavedACustomerBeforeUpdating()
     {
         Customer entity = new()
         {
@@ -181,12 +181,12 @@ public class CustomerManagerStepDefinitions
         _dbContext.Add(entity);
 
         await _dbContext.SaveChangesAsync();
-        _scenarioContext["UpdatedCustomerId"] = entity.Id;
+        _scenarioContext["UpdateCustomerId"] = entity.Id;
     }
 
     [Scope(Scenario = "Operator updates the customer")]
     [When(@"he update the customer")]
-    public async void WhenHeUpdateTheCustomer()
+    public async Task WhenHeUpdateTheCustomer()
     {
         UpdateCustomerCommand command = new()
         {
@@ -197,7 +197,7 @@ public class CustomerManagerStepDefinitions
             BankAccountNumber = "BankAccountNumberis changed",
             DateOfBirth = DateTime.Now
         };
-        command.SetId(Convert.ToInt32(_scenarioContext["UpdatedCustomerId"]));
+        command.SetId(Convert.ToInt32(_scenarioContext["UpdateCustomerId"]));
         UpdateCustomerHandler handler = new(_dbContext);
         await handler.Handle(command, default);
 
@@ -235,11 +235,77 @@ public class CustomerManagerStepDefinitions
 
     [Scope(Scenario = "Operator updates the wrong customer")]
     [Then(@"should throws not found error")]
-    public void ThenShouldThrowsNotFoundError()
+    public void ThenShouldThrowsNotFoundErrorUpdate()
     {
         UpdateCustomerHandler handler = new(_dbContext);
 
         Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle((UpdateCustomerCommand)_scenarioContext["WrongUpdateCommand"], default));
+    }
+
+    #endregion
+
+    #region Operator deletes the customer
+
+    [Scope(Tag = "delete_customer")]
+    [Given(@"Operator saved a customer before")]
+    public async Task GivenOperatorSavedACustomerBeforeDeleting()
+    {
+        Customer entity = new()
+        {
+            FirstName = "FirstName",
+            LastName = "LastName",
+            PhoneNumber = 777777,
+            Email = "Email",
+            BankAccountNumber = "BankAccountNumber",
+            DateOfBirth = DateTime.Now
+        };
+        _dbContext.Add(entity);
+
+        await _dbContext.SaveChangesAsync();
+        _scenarioContext["DeleteCustomerId"] = entity.Id;
+    }
+
+    [Scope(Scenario = "Operator deletes the customer")]
+    [When(@"he delete the customer")]
+    public async Task WhenHeDeleteTheCustomer()
+    {
+        DeleteCustomerCommand command = new();
+        command.SetId(Convert.ToInt32(_scenarioContext["DeleteCustomerId"]));
+        DeleteCustomerHandler handler = new(_dbContext);
+
+        await handler.Handle(command, default);
+    }
+
+    [Scope(Scenario = "Operator deletes the customer")]
+    [Then(@"the customer should remove")]
+    public async void ThenTheCustomerShouldRemove()
+    {
+        var expected = await _dbContext.Set<Customer>()
+            .FindAsync(Convert.ToInt32(_scenarioContext["DeleteCustomerId"]));
+
+        Assert.Null(expected);
+    }
+
+    #endregion
+
+    #region Operator deletes the wrong customer
+
+    [Scope(Scenario = "Operator deletes the wrong customer")]
+    [When(@"he deletes an invalid customer")]
+    public void WhenHeDeletesAnInvalidCustomer()
+    {
+        DeleteCustomerCommand command = new();
+        command.SetId(-1);
+        _scenarioContext["WrongDeleteCustomerCommand"] = command;
+    }
+
+    [Scope(Scenario = "Operator deletes the wrong customer")]
+    [Then(@"should throws not found error")]
+    public void ThenShouldThrowsNotFoundErrorDelete()
+    {
+        DeleteCustomerHandler handler = new(_dbContext);
+
+        Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle(DeleteCustomerHandler(_scenarioContext["WrongDeleteCustomerCommand"]), default));
     }
 
     #endregion
