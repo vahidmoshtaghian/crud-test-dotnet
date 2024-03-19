@@ -10,4 +10,5 @@ public interface IContext
     Task<int> SaveChangesAsync(CancellationToken token = default);
     EntityEntry Add(object enttiy);
     EntityEntry Update(object enttiy);
+    EntityEntry Remove(object enttiy);
 }

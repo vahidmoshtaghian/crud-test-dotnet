@@ -270,7 +270,7 @@ public class CustomerManagerStepDefinitions
     public async Task WhenHeDeleteTheCustomer()
     {
         DeleteCustomerCommand command = new();
-        command.SetId(Convert.ToInt32(_scenarioContext["DeleteCustomerId"]));
+        command.Id = Convert.ToInt32(_scenarioContext["DeleteCustomerId"]);
         DeleteCustomerHandler handler = new(_dbContext);
 
         await handler.Handle(command, default);
@@ -295,7 +295,7 @@ public class CustomerManagerStepDefinitions
     public void WhenHeDeletesAnInvalidCustomer()
     {
         DeleteCustomerCommand command = new();
-        command.SetId(-1);
+        command.Id = -1;
         _scenarioContext["WrongDeleteCustomerCommand"] = command;
     }
 
@@ -305,7 +305,7 @@ public class CustomerManagerStepDefinitions
     {
         DeleteCustomerHandler handler = new(_dbContext);
 
-        Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle(DeleteCustomerHandler(_scenarioContext["WrongDeleteCustomerCommand"]), default));
+        Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle((DeleteCustomerCommand)_scenarioContext["WrongDeleteCustomerCommand"], default));
     }
 
     #endregion
