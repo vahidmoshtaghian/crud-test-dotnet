@@ -269,8 +269,10 @@ public class CustomerManagerStepDefinitions
     [When(@"he delete the customer")]
     public async Task WhenHeDeleteTheCustomer()
     {
-        DeleteCustomerCommand command = new();
-        command.Id = Convert.ToInt32(_scenarioContext["DeleteCustomerId"]);
+        DeleteCustomerCommand command = new()
+        {
+            Id = Convert.ToInt32(_scenarioContext["DeleteCustomerId"])
+        };
         DeleteCustomerHandler handler = new(_dbContext);
 
         await handler.Handle(command, default);
@@ -294,8 +296,10 @@ public class CustomerManagerStepDefinitions
     [When(@"he deletes an invalid customer")]
     public void WhenHeDeletesAnInvalidCustomer()
     {
-        DeleteCustomerCommand command = new();
-        command.Id = -1;
+        DeleteCustomerCommand command = new()
+        {
+            Id = -1
+        };
         _scenarioContext["WrongDeleteCustomerCommand"] = command;
     }
 

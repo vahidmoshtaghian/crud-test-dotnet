@@ -27,5 +27,5 @@ public class DeleteCustomerHandler : IRequestHandler<DeleteCustomerCommand>
 
 public class DeleteCustomerCommand : IRequest
 {
-    public int Id { get; set; }
+    public int Id { get; init; }
 }
