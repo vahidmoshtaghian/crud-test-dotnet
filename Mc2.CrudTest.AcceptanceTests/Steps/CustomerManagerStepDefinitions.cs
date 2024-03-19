@@ -1,5 +1,6 @@
 using Mc2.CrudTest.AcceptanceTests.Drivers;
 using Mc2.CrudTest.Core.Application.PersonHandlers.Command;
+using Mc2.CrudTest.Core.Application.PersonHandlers.Query;
 using Mc2.CrudTest.Core.Domain.Entity;
 using Mc2.CrudTest.Core.Domain.Exceptions;
 using NUnit.Framework;
@@ -104,7 +105,7 @@ public class CustomerManagerStepDefinitions
     [Given(@"Operator saved (.*) customers")]
     public async Task GivenOperatorSavedCustomers(int customersCount)
     {
-        for (int i = 0; i < customersCount; i++)
+        for (int i = 1; i < customersCount + 1; i++)
         {
             _dbContext.Add(new Customer()
             {
@@ -125,7 +126,7 @@ public class CustomerManagerStepDefinitions
     public async Task WhenHeCallTheList()
     {
         GetAllCustomersHandler handler = new(_dbContext);
-        var response = await handler.Handle(new GetAllCustomersQuery());
+        var response = await handler.Handle(new GetAllCustomersQuery(), default);
         _scenarioContext["CustomersCount"] = response.Count();
     }
 
@@ -135,7 +136,7 @@ public class CustomerManagerStepDefinitions
     {
         var actual = Convert.ToInt32(_scenarioContext["CustomersCount"]);
 
-        Assert.Equals(actual, customersCount);
+        Assert.AreEqual(actual, customersCount);
     }
 
     #endregion
@@ -144,10 +145,10 @@ public class CustomerManagerStepDefinitions
 
     [Scope(Scenario = "Get an empty list if no customer inserted")]
     [When(@"Operator call the empty list")]
-    public void WhenOperatorCallTheEmptyList()
+    public async Task WhenOperatorCallTheEmptyList()
     {
         GetAllCustomersHandler handler = new(_dbContext);
-        var response = await handler.Handle(new GetAllCustomersQuery());
+        var response = await handler.Handle(new GetAllCustomersQuery(), default);
         _scenarioContext["CustomersEmptyListCount"] = response.Count();
     }
 

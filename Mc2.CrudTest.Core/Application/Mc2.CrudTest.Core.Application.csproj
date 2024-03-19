@@ -14,8 +14,4 @@
     <ProjectReference Include="..\Domain\Mc2.CrudTest.Core.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="PersonHandlers\Query\" />
-  </ItemGroup>
-
 </Project>
