@@ -69,3 +69,15 @@ Scenario: Operator deletes the wrong customer
 	Given Operator saved a customer before
 	When he deletes an invalid customer
 	Then should throws not found error
+
+
+Scenario: Operator wants to see a customer
+	Given Operator saved a customer before
+	When he requests the customer by id
+	Then the customer should returns
+
+Scenario: Operator requests a wrong customer
+	Given Operator saved a customer before
+	When  he requests a wrong customer
+	Then should throws customer id not found 
+	
