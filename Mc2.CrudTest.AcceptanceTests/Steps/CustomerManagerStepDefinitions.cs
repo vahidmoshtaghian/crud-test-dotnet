@@ -1,3 +1,7 @@
+using Mc2.CrudTest.AcceptanceTests.Drivers;
+using Mc2.CrudTest.Core.Application.PersonHandlers.Command;
+using NUnit.Framework;
+
 namespace Mc2.CrudTest.AcceptanceTests.Steps;
 
 [Binding]
@@ -10,15 +14,25 @@ public class CustomerManagerStepDefinitions
         _scenarioContext = scenarioContext;
     }
 
-    [When(@"first name is test(.*), lastname is test(.*), date of birth is (.*)/(.*), phone number is (.*), email is aa@bb\.cc and bank account number is (.*)")]
-    public void WhenFirstNameIsTestLastnameIsTestDateOfBirthIsPhoneNumberIsEmailIsAaBb_CcAndBankAccountNumberIs(int p0, int p1, decimal p2, int p3, int p4, int p5)
+    [When(@"first name is (.*), lastname is (.*), date of birth is (.*), phone number is (.*), email is (.*) and bank account number is (.*)")]
+    public void WhenFirstNameLastnameDateOfBirthIsPhoneNumberIsEmailAndBankAccountNumberIs
+        (string firstName, string lastName, DateTime birth, long phone, string email, string acocuntNumber)
     {
-        throw new PendingStepException();
+        AddCustomerCommand request = new(firstName, lastName, birth, phone, email, acocuntNumber);
+
+
+        _scenarioContext["Customer"] = request;
     }
 
-    [Then(@"customer should be creatd")]
-    public void ThenCustomerShouldBeCreatd()
+    [Then(@"customer should be created")]
+    public async Task ThenCustomerShouldBeCreatd()
     {
-        throw new PendingStepException();
+        var request = (AddCustomerCommand)_scenarioContext["Customer"];
+
+        InMemeoryDbContext db = new();
+        AddCustomerHandler handler = new(db);
+        var response = await handler.Handle(request, default);
+
+        Assert.NotZero(response);
     }
 }

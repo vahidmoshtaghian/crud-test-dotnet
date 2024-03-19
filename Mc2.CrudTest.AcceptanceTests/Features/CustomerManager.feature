@@ -4,5 +4,9 @@ As a an operator I wish to be able to Create, Update, Delete customers and list 
 	
 @customer
 Scenario: Operator creates a customer
-	When first name is test1, lastname is test2, date of birth is 1990/01/01, phone number is 123456890, email is aa@bb.cc and bank account number is 00000000
-	Then customer should be creatd
+	When first name is <firstName>, lastname is <lastName>, date of birth is <dateOfBirth>, phone number is <phoneNumber>, email is <email> and bank account number is <acocuntNumber>
+	Then customer should be created
+
+	Examples: 
+		| firstName | lastName | dateOfBirth | phoneNumber | email    | accountNumber |
+		| test1     | test2    | 1990-05-10  | 123456890   | aa@bb.cc | 00000000      |
