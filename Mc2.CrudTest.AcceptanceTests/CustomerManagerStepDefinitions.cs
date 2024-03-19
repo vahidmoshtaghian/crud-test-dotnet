@@ -1,5 +1,6 @@
 using Mc2.CrudTest.AcceptanceTests.Drivers;
 using Mc2.CrudTest.Core.Application.PersonHandlers.Command;
+using Mc2.CrudTest.Core.Domain.Exceptions;
 using NUnit.Framework;
 
 namespace Mc2.CrudTest.AcceptanceTests;
