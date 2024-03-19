@@ -71,11 +71,13 @@ Scenario: Operator deletes the wrong customer
 	Then should throws not found error
 
 
+@get_customer_by_id
 Scenario: Operator wants to see a customer
 	Given Operator saved a customer before
 	When he requests the customer by id
 	Then the customer should returns
-
+	
+@get_customer_by_id
 Scenario: Operator requests a wrong customer
 	Given Operator saved a customer before
 	When  he requests a wrong customer

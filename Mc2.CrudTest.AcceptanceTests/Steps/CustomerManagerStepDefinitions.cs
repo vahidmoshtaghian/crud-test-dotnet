@@ -313,4 +313,68 @@ public class CustomerManagerStepDefinitions
     }
 
     #endregion
+
+    #region Operator wants to see a customer
+
+    [Scope(Tag = "get_customer_by_id")]
+    [Given(@"Operator saved a customer before")]
+    public async Task GivenOperatorSavedACustomerBeforeGettingById()
+    {
+        Customer entity = new()
+        {
+            FirstName = "FirstName by id",
+            LastName = "LastName by id",
+            PhoneNumber = 666666666,
+            Email = "Email by id",
+            BankAccountNumber = "BankAccountNumber by id",
+            DateOfBirth = DateTime.Now
+        };
+        _dbContext.Add(entity);
+
+        await _dbContext.SaveChangesAsync();
+        _scenarioContext["GetCustomerId"] = entity.Id;
+    }
+
+    [Scope(Scenario = "Operator wants to see a customer")]
+    [When(@"he requests the customer by id")]
+    public async Task WhenHeRequestsTheCustomerById()
+    {
+        GetCustomerByIdHandler handler = new(_dbContext);
+        GetCustomerByIdQuery query = new()
+        {
+            Id = Convert.ToInt32(_scenarioContext["GetCustomerId"])
+        };
+        var response = await handler.Handle(query, default);
+
+        _scenarioContext["GetCustomerById"] = response;
+    }
+
+    [Scope(Scenario = "Operator wants to see a customer")]
+    [Then(@"the customer should returns")]
+    public void ThenTheCustomerShouldReturns()
+    {
+        var entity = (GetCustomerByIdQueryResponse)_scenarioContext["GetCustomerById"];
+
+        Assert.NotNull(entity);
+    }
+
+    #endregion
+
+    #region MyRegion
+
+    [Scope(Scenario = "Operator requests a wrong customer")]
+    [When(@"he requests a wrong customer")]
+    public void WhenHeRequestsAWrongCustomer()
+    {
+        throw new PendingStepException();
+    }
+
+    [Scope(Scenario = "Operator requests a wrong customer")]
+    [Then(@"should throws customer id not found")]
+    public void ThenShouldThrowsCustomerIdNotFound()
+    {
+        throw new PendingStepException();
+    }
+
+    #endregion
 }
