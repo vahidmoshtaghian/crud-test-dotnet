@@ -31,3 +31,14 @@ Examples:
 	| firstName | lastName | dateOfBirth | phoneNumber  | email                    | accountNumber |
 	| test1     | test2    | 1990-05-10  | 564564654564 | SonyaAHerrera@dayrep.com | 00000000      |
 	| test1     | test2    | 1990-05-10  | 564          | BerthaAEllis@teleworm.us | 00000000      |
+
+@customers_list
+Scenario: Get all the inserted customer in a list
+	Given Operator saved 3 customers
+	When he call the list
+	Then All 3 customers should return
+	
+@customers_empty_list
+Scenario: Get an empty list if no customer inserted
+	When Operator call the empty list
+	Then No customer should returns
