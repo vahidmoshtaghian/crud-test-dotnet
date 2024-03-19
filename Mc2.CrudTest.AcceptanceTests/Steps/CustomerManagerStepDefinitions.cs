@@ -23,6 +23,7 @@ public class CustomerManagerStepDefinitions
         _dbContext = new();
     }
 
+    [Scope(Tag = "correct_input")]
     [When(@"first name is (.*), lastname is (.*), date of birth is (.*), phone number is (.*), email is (.*) and bank account number is (.*)")]
     public void WhenFirstNameLastnameDateOfBirthIsPhoneNumberIsEmailAndBankAccountNumberIs
         (string firstName, string lastName, DateTime birth, long phone, string email, string acocuntNumber)
@@ -32,6 +33,7 @@ public class CustomerManagerStepDefinitions
         _scenarioContext["Customer"] = request;
     }
 
+    [Scope(Tag = "correct_input")]
     [Then(@"customer should be created")]
     public async Task ThenCustomerShouldBeCreatd()
     {
@@ -44,7 +46,7 @@ public class CustomerManagerStepDefinitions
     }
 
 
-
+    [Scope(Tag = "invalid_email")]
     [When(@"first name is (.*), lastname is (.*), date of birth is (.*), phone number is (.*), email is wrong like (.*) and bank account number is (.*)")]
     public void WhenFirstNameIsTestLastnameIsTestDateOfBirthIsPhoneNumberIsEmailIsWrongLikeHjftgyhjtgAndBankAccountNumberIsAcocuntNumber
         (string firstName, string lastName, DateTime birth, long phone, string email, string acocuntNumber)
@@ -54,8 +56,9 @@ public class CustomerManagerStepDefinitions
         _scenarioContext["CustomerWrongEmail"] = request;
     }
 
+    [Scope(Tag = "invalid_email")]
     [Then(@"should throws email validation error")]
-    public async void ThenshouldThrowsRmailValidationError()
+    public void ThenshouldThrowsRmailValidationError()
     {
         var request = (AddCustomerCommand)_scenarioContext["CustomerWrongEmail"];
         AddCustomerHandler handler = new(_dbContext);
@@ -65,6 +68,7 @@ public class CustomerManagerStepDefinitions
 
 
 
+    [Scope(Tag = "invalid_phone")]
     [When(@"first name is (.*), lastname is (.*), date of birth is (.*), wrong phone number is (.*), email is (.*) and bank account number is (.*)")]
     public void WhenFirstNameIsTestLastnameIsTestDateOfBirthIsWrongPhoneNumberIsQwerdasdasEmailIsAaBb_CcAndBankAccountNumberIsAcocuntNumber
         (string firstName, string lastName, DateTime birth, long phone, string email, string acocuntNumber)
@@ -74,10 +78,11 @@ public class CustomerManagerStepDefinitions
         _scenarioContext["CustomerWrongPhone"] = request;
     }
 
+    [Scope(Tag = "invalid_phone")]
     [Then(@"should throws phone validation error")]
     public void ThenSshouldThrowsPhoneValidationError()
     {
-        var request = (AddCustomerCommand)_scenarioContext["CustomerWrongEmail"];
+        var request = (AddCustomerCommand)_scenarioContext["CustomerWrongPhone"];
         AddCustomerHandler handler = new(_dbContext);
 
         Assert.ThrowsAsync<PhoneValidationException>(async () => await handler.Handle(request, default));

@@ -76,13 +76,13 @@ namespace Mc2.CrudTest.AcceptanceTests.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Operator creates a customer")]
-        [NUnit.Framework.CategoryAttribute("customer")]
-        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "123456890", "aa@bb.cc", "00000000", null)]
-        [NUnit.Framework.TestCaseAttribute("john", "due", "1900-05-10", "98766553214", "aa@bsdff.cc", "11111111", null)]
+        [NUnit.Framework.CategoryAttribute("correct_input")]
+        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "123456890", "vahid.moshtagh@gmail.com", "00000000", null)]
+        [NUnit.Framework.TestCaseAttribute("john", "due", "1900-05-10", "98766553214", "vahid.moshtaghian@hotmail.com", "11111111", null)]
         public virtual void OperatorCreatesACustomer(string firstName, string lastName, string dateOfBirth, string phoneNumber, string email, string accountNumber, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "customer"};
+                    "correct_input"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -118,7 +118,7 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 7
  testRunner.When(string.Format("first name is {0}, lastname is {1}, date of birth is {2}, phone number is {3}, em" +
-                            "ail is {4} and bank account number is <acocuntNumber>", firstName, lastName, dateOfBirth, phoneNumber, email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                            "ail is {4} and bank account number is {5}", firstName, lastName, dateOfBirth, phoneNumber, email, accountNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
  testRunner.Then("customer should be created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -129,13 +129,13 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Operator creates a customer with invalid email")]
-        [NUnit.Framework.CategoryAttribute("customer")]
-        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "123456890", "hjftgyhjtg", "00000000", null)]
-        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "123456890", "321312", "00000000", null)]
+        [NUnit.Framework.CategoryAttribute("invalid_email")]
+        [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "123456890", "hjftgyhjtg", "222222", null)]
+        [NUnit.Framework.TestCaseAttribute("test3", "test4", "1990-12-20", "123456890", "sdfdsfdsfsd", "3333333", null)]
         public virtual void OperatorCreatesACustomerWithInvalidEmail(string firstName, string lastName, string dateOfBirth, string phoneNumber, string email, string accountNumber, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "customer"};
+                    "invalid_email"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -171,7 +171,7 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 17
  testRunner.When(string.Format("first name is {0}, lastname is {1}, date of birth is {2}, phone number is {3}, em" +
-                            "ail is wrong like {4} and bank account number is <acocuntNumber>", firstName, lastName, dateOfBirth, phoneNumber, email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                            "ail is wrong like {4} and bank account number is {5}", firstName, lastName, dateOfBirth, phoneNumber, email, accountNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 18
  testRunner.Then("should throws email validation error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -182,13 +182,13 @@ this.ScenarioInitialize(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Operator creates a customer with invalid phone number")]
-        [NUnit.Framework.CategoryAttribute("customer")]
+        [NUnit.Framework.CategoryAttribute("invalid_phone")]
         [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "qwerdasdas", "aa@bb.cc", "00000000", null)]
         [NUnit.Framework.TestCaseAttribute("test1", "test2", "1990-05-10", "564", "aa@bsdff.cc", "00000000", null)]
         public virtual void OperatorCreatesACustomerWithInvalidPhoneNumber(string firstName, string lastName, string dateOfBirth, string phoneNumber, string email, string accountNumber, string[] exampleTags)
         {
             string[] @__tags = new string[] {
-                    "customer"};
+                    "invalid_phone"};
             if ((exampleTags != null))
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
@@ -224,7 +224,7 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 27
  testRunner.When(string.Format("first name is {0}, lastname is {1}, date of birth is {2}, wrong phone number is {" +
-                            "3}, email is {4} and bank account number is <acocuntNumber>", firstName, lastName, dateOfBirth, phoneNumber, email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                            "3}, email is {4} and bank account number is {5}", firstName, lastName, dateOfBirth, phoneNumber, email, accountNumber), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 28
  testRunner.Then("should throws phone validation error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");

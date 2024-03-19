@@ -1,5 +1,7 @@
 ﻿using Mc2.CrudTest.Core.Domain.Contract;
 using Mc2.CrudTest.Core.Domain.Entity;
+using Mc2.CrudTest.Core.Domain.Exceptions;
+using Mc2.CrudTest.Core.Domain.Utility;
 using MediatR;
 
 namespace Mc2.CrudTest.Core.Application.PersonHandlers.Command;
@@ -15,6 +17,9 @@ public class AddCustomerHandler : IRequestHandler<AddCustomerCommand, int>
 
     public async Task<int> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
     {
+        if (!request.Email.IsValidEmail())
+            throw new EmailValidationException();
+
         var entity = request.MapToDomain();
         _context.Add(entity);
 
