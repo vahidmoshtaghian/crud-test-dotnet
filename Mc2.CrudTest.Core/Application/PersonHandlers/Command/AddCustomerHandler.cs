@@ -1,10 +1,12 @@
 ﻿using Mc2.CrudTest.Core.Domain.Contract;
 using Mc2.CrudTest.Core.Domain.Dto.PersonModels;
+using Mc2.CrudTest.Core.Domain.Entity;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Core.Application.PersonHandlers.Command;
 
-public class AddCustomerHandler : IRequestHandler<AddCustomerCommand, IEnumerable<AddCustomerCommandResponse>>
+public class AddCustomerHandler : IRequestHandler<AddCustomerCommand, AddCustomerCommandResponse>
 {
     private readonly IContext _context;
 
@@ -13,15 +15,16 @@ public class AddCustomerHandler : IRequestHandler<AddCustomerCommand, IEnumerabl
         _context = context;
     }
 
-    public Task<IEnumerable<AddCustomerCommandResponse>> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
+    public async Task<AddCustomerCommandResponse> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
     {
+        await _context.Set<Customer>().ToListAsync();
         throw new NotImplementedException();
     }
 }
 
 #nullable disable
 
-public class AddCustomerCommand : IRequest<IEnumerable<AddCustomerCommandResponse>>
+public class AddCustomerCommand : IRequest<AddCustomerCommandResponse>
 {
 
 }

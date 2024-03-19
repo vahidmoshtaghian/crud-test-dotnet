@@ -1,5 +1,6 @@
 using Mc2.CrudTest.Core.Application;
 using Mc2.CrudTest.Infrastructure;
+using Mc2.CrudTest.Presentation.Server.MIddlewares;
 
 namespace Mc2.CrudTest.Presentation.Server;
 
@@ -30,6 +31,8 @@ public class Program
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
+
+        app.UseDatabaseInitiator();
 
         app.UseHttpsRedirection();
 

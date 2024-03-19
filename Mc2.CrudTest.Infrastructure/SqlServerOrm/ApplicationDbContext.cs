@@ -24,4 +24,9 @@ public class ApplicationDbContext : DbContext, IContext
 
         base.OnModelCreating(modelBuilder);
     }
+
+    public async Task InitAsync()
+    {
+        await Database.MigrateAsync();
+    }
 }
