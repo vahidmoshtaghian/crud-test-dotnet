@@ -1,6 +1,6 @@
 ﻿using Mc2.CrudTest.Core.Domain.Contract;
 
-namespace Mc2.CrudTest.Presentation.Server.MIddlewares;
+namespace Mc2.CrudTest.Presentation.Server.Middlewares;
 
 public class DatabaseInitiatorMiddleware
 {

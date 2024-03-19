@@ -1,6 +1,6 @@
 using Mc2.CrudTest.Core.Application;
 using Mc2.CrudTest.Infrastructure;
-using Mc2.CrudTest.Presentation.Server.MIddlewares;
+using Mc2.CrudTest.Presentation.Server.Middlewares;
 
 namespace Mc2.CrudTest.Presentation.Server;
 
