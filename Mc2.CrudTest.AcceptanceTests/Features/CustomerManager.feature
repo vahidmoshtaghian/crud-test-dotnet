@@ -15,7 +15,7 @@ Examples:
 @customer
 Scenario: Operator creates a customer with invalid email
 	When first name is <firstName>, lastname is <lastName>, date of birth is <dateOfBirth>, phone number is <phoneNumber>, email is wrong like <email> and bank account number is <acocuntNumber>
-	Then should throws error
+	Then should throws email validation error
 
 Examples:
 	| firstName | lastName | dateOfBirth | phoneNumber | email      | accountNumber |
@@ -25,7 +25,7 @@ Examples:
 @customer
 Scenario: Operator creates a customer with invalid phone number
 	When first name is <firstName>, lastname is <lastName>, date of birth is <dateOfBirth>, wrong phone number is <phoneNumber>, email is <email> and bank account number is <acocuntNumber>
-	Then should throws error
+	Then should throws phone validation error
 
 Examples:
 	| firstName | lastName | dateOfBirth | phoneNumber | email       | accountNumber |

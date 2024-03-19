@@ -174,7 +174,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "ail is wrong like {4} and bank account number is <acocuntNumber>", firstName, lastName, dateOfBirth, phoneNumber, email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 18
- testRunner.Then("should throws error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("should throws email validation error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -227,7 +227,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "3}, email is {4} and bank account number is <acocuntNumber>", firstName, lastName, dateOfBirth, phoneNumber, email), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 28
- testRunner.Then("should throws error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("should throws phone validation error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
