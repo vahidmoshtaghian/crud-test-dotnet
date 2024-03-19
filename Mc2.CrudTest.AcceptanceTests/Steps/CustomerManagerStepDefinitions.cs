@@ -199,7 +199,7 @@ public class CustomerManagerStepDefinitions
         };
         command.SetId(Convert.ToInt32(_scenarioContext["UpdatedCustomerId"]));
         UpdateCustomerHandler handler = new(_dbContext);
-        await handler.handle(command, default);
+        await handler.Handle(command, default);
 
         _scenarioContext["UpdatedCustomer"] = command;
     }
@@ -228,7 +228,7 @@ public class CustomerManagerStepDefinitions
     public void WhenHeUpdateAnInvalidCustomer()
     {
         UpdateCustomerCommand command = new();
-        command.SetId(Convert.ToInt32(_scenarioContext["UpdatedCustomerId"]));
+        command.SetId(-1);
 
         _scenarioContext["WrongUpdateCommand"] = command;
     }
@@ -239,7 +239,7 @@ public class CustomerManagerStepDefinitions
     {
         UpdateCustomerHandler handler = new(_dbContext);
 
-        Assert.ThrowsAsync<NotFoundException>(async () => await handler.handle((UpdateCustomerCommand)_scenarioContext["WrongUpdateCommand"], default));
+        Assert.ThrowsAsync<NotFoundException>(async () => await handler.Handle((UpdateCustomerCommand)_scenarioContext["WrongUpdateCommand"], default));
     }
 
     #endregion

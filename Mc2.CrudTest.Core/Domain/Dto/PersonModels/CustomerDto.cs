@@ -13,7 +13,7 @@ public class CustomerDto
     public CustomerDto(Customer entity)
     {
         Id = entity.Id;
-        FirsName = entity.FirstName;
+        FirstName = entity.FirstName;
         LastName = entity.LastName;
         DateOfBirth = entity.DateOfBirth;
         PhoneNumber = entity.PhoneNumber;
@@ -21,9 +21,9 @@ public class CustomerDto
         BankAccountNumber = entity.BankAccountNumber;
     }
 
-    protected int Id { get; set; }
+    public int Id { get; private set; }
 
-    public string FirsName { get; set; }
+    public string FirstName { get; set; }
 
     public string LastName { get; set; }
 
@@ -36,4 +36,17 @@ public class CustomerDto
     public string BankAccountNumber { get; set; }
 
     public void SetId(int id) => Id = id;
+
+    public Customer MapToDomain(Customer entity = null)
+    {
+        entity ??= new();
+        entity.FirstName = FirstName;
+        entity.LastName = LastName;
+        entity.DateOfBirth = DateOfBirth;
+        entity.PhoneNumber = PhoneNumber;
+        entity.Email = Email;
+        entity.BankAccountNumber = BankAccountNumber;
+
+        return entity;
+    }
 }

@@ -9,4 +9,5 @@ public interface IContext
     DbSet<T> Set<T>() where T : class;
     Task<int> SaveChangesAsync(CancellationToken token = default);
     EntityEntry Add(object enttiy);
+    EntityEntry Update(object enttiy);
 }
