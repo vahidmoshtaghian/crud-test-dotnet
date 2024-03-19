@@ -19,6 +19,12 @@ public class CustomerController : ApplicationControllerBase
         return Mediator.Send(new GetAllCustomersQuery());
     }
 
+    [HttpGet("{id:int}")]
+    public async Task<GetCustomerByIdQueryResponse> GetById([FromRoute] int id)
+    {
+        return await Mediator.Send(new GetCustomerByIdQuery() { Id = id });
+    }
+
     [HttpPut("{id:int}")]
     public async Task Update([FromRoute] int id, [FromBody] UpdateCustomerCommand command)
     {
