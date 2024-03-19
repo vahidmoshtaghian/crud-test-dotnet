@@ -9,7 +9,7 @@ namespace Mc2.CrudTest.Core.Domain.Entity;
 public class Customer : EntityBase
 {
     [Required, MaxLength(100)]
-    public string FirsName { get; set; }
+    public string FirstName { get; set; }
 
     [Required, MaxLength(100)]
     public string LastName { get; set; }

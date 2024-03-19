@@ -3,7 +3,7 @@ using Mc2.CrudTest.Core.Application.PersonHandlers.Command;
 using Mc2.CrudTest.Core.Domain.Exceptions;
 using NUnit.Framework;
 
-namespace Mc2.CrudTest.AcceptanceTests;
+namespace Mc2.CrudTest.AcceptanceTests.Steps;
 
 [Binding]
 public class CustomerManagerStepDefinitions

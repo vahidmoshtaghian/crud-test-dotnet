@@ -21,7 +21,7 @@ public class ApplicationDbContext : DbContext, IContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer>()
-            .HasIndex(p => new { p.FirsName, p.LastName, p.PhoneNumber })
+            .HasIndex(p => new { p.FirstName, p.LastName, p.PhoneNumber })
             .IsUnique();
         modelBuilder.Entity<Customer>()
             .HasIndex(p => p.Email)

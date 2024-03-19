@@ -1,7 +1,6 @@
 ﻿using Mc2.CrudTest.Core.Domain.Contract;
 using Mc2.CrudTest.Core.Domain.Entity;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Mc2.CrudTest.Core.Application.PersonHandlers.Command;
 
@@ -16,8 +15,12 @@ public class AddCustomerHandler : IRequestHandler<AddCustomerCommand, int>
 
     public async Task<int> Handle(AddCustomerCommand request, CancellationToken cancellationToken)
     {
-        await _context.Set<Customer>().ToListAsync();
-        throw new NotImplementedException();
+        var entity = request.MapToDomain();
+        _context.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
     }
 }
 
@@ -29,5 +32,16 @@ public record AddCustomerCommand(
     DateTime DateOfBirth,
     long PhoneNumber,
     string Email,
-    string BankAccountNumber) : IRequest<int>;
+    string BankAccountNumber) : IRequest<int>
+{
+    public Customer MapToDomain() => new()
+    {
+        FirstName = FirstName,
+        LastName = LastName,
+        DateOfBirth = DateOfBirth,
+        PhoneNumber = PhoneNumber,
+        Email = Email,
+        BankAccountNumber = BankAccountNumber
+    };
+}
 

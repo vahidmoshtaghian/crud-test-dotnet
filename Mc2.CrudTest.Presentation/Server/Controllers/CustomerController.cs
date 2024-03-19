@@ -1,4 +1,3 @@
-using Mc2.CrudTest.Core.Application.PersonHandlers.Command;
 using Mc2.CrudTest.Presentation.Server.Controllers.Base;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +8,8 @@ namespace Mc2.CrudTest.Presentation.Server.Controllers
         [HttpGet]
         public async Task Get()
         {
-            var result = await Mediator.Send(new AddCustomerCommand());
+            //var result = await Mediator.Send(new AddCustomerCommand());
+            throw new NotImplementedException();
         }
     }
 }
